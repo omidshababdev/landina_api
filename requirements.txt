@@ -1,2 +1,4 @@
 fastapi
 uvicorn
+spacy
+beautifulsoup4
