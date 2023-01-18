@@ -1,22 +1,23 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.config import settings
+from account.config import settings
 import uvicorn
 
-from app.routers import auth, user
+from account.routers import auth, user
+from services.monitors.brandwidth import main
 
-app = FastAPI()
+account = FastAPI()
 
 if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=5000, reload=True)
+    uvicorn.run("main:account", host="127.0.0.1", port=5000, reload=True)
 
-app = FastAPI()
+account = FastAPI()
 
 origins = [
     settings.CLIENT_ORIGIN,
 ]
 
-app.add_middleware(
+account.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
@@ -26,10 +27,13 @@ app.add_middleware(
 
 
 # ROUTES
-@app.get("/")
+@account.get("/")
 async def root():
     return {"message": "Welcome to Landina API"}
 
-app.include_router(auth.router, tags=['Auth'], prefix='/auth')
-app.include_router(user.router, tags=['Users'], prefix='/users')
+## ACCOUNT
+account.include_router(auth.router, tags=['Auth'], prefix='/auth')
+account.include_router(user.router, tags=['Users'], prefix='/users')
 
+## MONITORS
+account.include_router(main.router, tags=['Monitors'], prefix='/monitors')

@@ -4,12 +4,10 @@ def userEntity(user) -> dict:
         "name": user["name"],
         "username": user["username"],
         "email": user["email"],
-        "password": user["password"],
         "type": user["type"],
-        "image": user["image"],
         "password": user["password"],
-        "created_at": user["created_at"],
-        "updated_at": user["updated_at"]
+        "createdAt": user["createdAt"],
+        "updatedAt": user["updatedAt"]
     }
 
 
@@ -19,9 +17,9 @@ def userResponseEntity(user) -> dict:
         "name": user["name"],
         "username": user["username"],
         "email": user["email"],
-        "image": user["image"],
-        "created_at": user["created_at"],
-        "updated_at": user["updated_at"]
+        "type": user["type"],
+        "createdAt": user["createdAt"],
+        "updatedAt": user["updatedAt"]
     }
 
 

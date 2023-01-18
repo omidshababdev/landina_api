@@ -3,20 +3,15 @@ from pydantic import BaseModel, EmailStr, constr
 
 
 class UserBaseSchema(BaseModel):
-    name: str
-    email: str
-    image: str
+    name: str | None = None
+    username: str
+    email: str 
     type: str | None = None
-    created_at: datetime | None = None
-    updated_at: datetime | None = None
-
-    class Config:
-        orm_mode = True
-
+    createdAt: datetime | None = None
+    updatedAt: datetime | None = None
 
 class CreateUserSchema(UserBaseSchema):
     password: constr(min_length=8)
-    active: bool = True
 
 
 class LoginUserSchema(BaseModel):

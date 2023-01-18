@@ -1,6 +1,6 @@
 from pymongo import mongo_client
 import pymongo
-from app.config import settings
+from account.config import settings
 
 client = mongo_client.MongoClient(
     settings.DATABASE_URL, serverSelectionTimeoutMS=5000)
