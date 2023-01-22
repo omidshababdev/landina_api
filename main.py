@@ -1,7 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from account.config import settings
-from fastapi import UploadFile, File
 import uvicorn
 
 from account.routers import auth, user
@@ -31,16 +30,6 @@ account.add_middleware(
 @account.get("/")
 async def root():
     return {"message": "Welcome to Landina API"}
-
-@account.post("/recognizers/image")
-async def recognize_image(file: UploadFile = File(...)):
-    # Read the file uploaded by user
-    
-    # After doing preprocessing
-    
-    # Make prediction
-    
-    pass
 
 ## ACCOUNT
 account.include_router(auth.router, tags=['Auth'], prefix='/auth')

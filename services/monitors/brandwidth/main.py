@@ -6,7 +6,8 @@ router = APIRouter()
 
 @router.get("/brandwidth")
 async def root():
-    return {"message": brandwidthMonitor}
+    brandwidth = brandwidthMonitor()
+    return {"brandwidth": [brandwidth]}
 
 def brandwidthMonitor():
     last_received = psutil.net_io_counters().bytes_recv
@@ -32,4 +33,4 @@ def brandwidthMonitor():
         
         time.sleep(1)
         
-        print(f"{mb_new_received: .2f} MB received, {mb_new_sent: .2f} MB sent, {mb_new_total: .2f} MB total")
+        return(f"{mb_new_received: .2f} MB received, {mb_new_sent: .2f} MB sent, {mb_new_total: .2f} MB total")
