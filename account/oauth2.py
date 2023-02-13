@@ -5,7 +5,7 @@ from fastapi_jwt_auth import AuthJWT
 from pydantic import BaseModel
 from bson.objectid import ObjectId
 
-from account.serializers.userSerializers import userEntity
+from account.serializers.user import userEntity
 
 from .database import User
 from .config import settings

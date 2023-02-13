@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 from bson.objectid import ObjectId
-from account.serializers.userSerializers import userResponseEntity
+from account.serializers.user import userResponseEntity
 
 from account.database import User
 from .. import schemas, oauth2
