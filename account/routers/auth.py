@@ -1,11 +1,12 @@
 from datetime import datetime, timedelta
 from bson.objectid import ObjectId
 from fastapi import APIRouter, Response, status, Depends, HTTPException
+from ..schemas import user
 
 from account import oauth2
 from account.database import User
 from account.serializers.user import userEntity, userResponseEntity
-from .. import schemas, utils
+from .. import utils
 from account.oauth2 import AuthJWT
 from ..config import settings
 
@@ -15,8 +16,8 @@ ACCESS_TOKEN_EXPIRES_IN = settings.ACCESS_TOKEN_EXPIRES_IN
 REFRESH_TOKEN_EXPIRES_IN = settings.REFRESH_TOKEN_EXPIRES_IN
 
 
-@router.post('/register', status_code=status.HTTP_201_CREATED, response_model=schemas.UserResponse)
-async def create_user(payload: schemas.CreateUserSchema):
+@router.post('/register', status_code=status.HTTP_201_CREATED, response_model=user.UserResponse)
+async def create_user(payload: user.CreateUserSchema):
     # Check if user already exist
     user = User.find_one({'email': payload.email.lower()})
     if user:
@@ -36,7 +37,7 @@ async def create_user(payload: schemas.CreateUserSchema):
 
 
 @router.post('/login')
-def login(payload: schemas.LoginUserSchema, response: Response, Authorize: AuthJWT = Depends()):
+def login(payload: user.LoginUserSchema, response: Response, Authorize: AuthJWT = Depends()):
     # Check if the user exist
     db_user = User.find_one({'email': payload.email.lower()})
     if not db_user:

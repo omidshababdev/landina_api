@@ -4,7 +4,7 @@ from account.config import settings
 import uvicorn
 
 from account.routers import auth, user
-# from services.monitor.brandwidth import main
+from services.monitor.brandwidth import main
 
 account = FastAPI()
 
@@ -36,4 +36,4 @@ account.include_router(auth.router, tags=['Auth'], prefix='/auth')
 account.include_router(user.router, tags=['Users'], prefix='/users')
 
 ## MONITORS
-# account.include_router(main.router, tags=['Monitors'], prefix='/monitors')
+account.include_router(main.router, tags=['Monitors'], prefix='/monitors')
